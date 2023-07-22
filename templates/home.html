@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Navbar for both logged-in and anonymous users -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Your Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if username %}
+                <li class="nav-item">
+                    <a class="btn btn-success mr-2" href="{{ url_for('home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger mr-2" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-info" href="{{ url_for('account') }}">Account</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="btn btn-primary mr-2" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-warning" href="{{ url_for('signup') }}">Signup</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Success message for logged-in users -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'success' %}
+    <div class="alert alert-{{ category }}" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Content Area (Main Body) -->
+    <div class="container">
+        <h3>"Appearances can be deceiving! What may seem like a simple website at first glance has the power to surprise
+            you with its hidden potential. Like a silent underdog, it can effortlessly evolve into a robust digital
+            powerhouse. Underestimate it at your own risk, for this unassuming website holds the key to a world of
+            limitless possibilities. Brace yourself for an extraordinary transformation!"</h3>
+    </div>
+    <!-- Footer -->
+    <footer class="footer fixed-bottom bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>&copy; {{ current_year }} Your Website. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- ... Navbar code ... -->
+
+    <div class="container">
+        <h1 class="mt-4">Signup</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <a href="{{ url_for('login') }}">Already have an account? Login here</a>
+        <form method="post" action="{{ url_for('signup') }}" class="mt-4">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="retype_password">Retype Password:</label>
+                <input type="password" name="retype_password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Signup</button>
+        </form>
+    </div>
+    <!-- ... Bootstrap JS and other scripts ... -->
+</body>
+
+</html>
